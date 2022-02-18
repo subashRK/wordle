@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wordle</title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./app.js" defer type="module"></script>
+  </head>
+  <body>
+    <div class="tip"></div>
+
+    <div class="profile-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="24px"
+        fill="#FFFFFF"
+      >
+        <path d="M0 0h24v24H0V0z" fill="none" />
+        <path
+          d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+        />
+      </svg>
+    </div>
+
+    <div class="profile-modal">
+      <div class="profile-modal-content">
+        <h2 class="title">Statistics</h2>
+        <div class="stats">
+          <div class="stat">
+            <div class="title">Games</div>
+            <div class="text" data-games-played>80</div>
+          </div>
+          <div class="stat">
+            <div class="title">Wins</div>
+            <div class="text" data-games-won>70</div>
+          </div>
+          <div class="stat">
+            <div class="title">Percent</div>
+            <div class="text" data-win-percentage>90%</div>
+          </div>
+        </div>
+
+        <button class="close-btn">Close</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="words">
+        <div class="word">
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+        </div>
+        <div class="word">
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+        </div>
+        <div class="word">
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+        </div>
+        <div class="word">
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+        </div>
+        <div class="word">
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+        </div>
+        <div class="word">
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+          <div class="letter"></div>
+        </div>
+      </div>
+
+      <div class="keyboard">
+        <div class="row">
+          <button data-key="q" class="key">q</button>
+          <button data-key="w" class="key">w</button>
+          <button data-key="e" class="key">e</button>
+          <button data-key="r" class="key">r</button>
+          <button data-key="t" class="key">t</button>
+          <button data-key="y" class="key">y</button>
+          <button data-key="u" class="key">u</button>
+          <button data-key="i" class="key">i</button>
+          <button data-key="o" class="key">o</button>
+          <button data-key="p" class="key">p</button>
+        </div>
+        <div class="row">
+          <button data-key="a" class="key">a</button>
+          <button data-key="s" class="key">s</button>
+          <button data-key="d" class="key">d</button>
+          <button data-key="f" class="key">f</button>
+          <button data-key="g" class="key">g</button>
+          <button data-key="h" class="key">h</button>
+          <button data-key="j" class="key">j</button>
+          <button data-key="k" class="key">k</button>
+          <button data-key="l" class="key">l</button>
+        </div>
+        <div class="row">
+          <button data-enter-key class="key action">Enter</button>
+          <button data-key="z" class="key">z</button>
+          <button data-key="x" class="key">x</button>
+          <button data-key="c" class="key">c</button>
+          <button data-key="v" class="key">v</button>
+          <button data-key="b" class="key">b</button>
+          <button data-key="n" class="key">n</button>
+          <button data-key="m" class="key">m</button>
+          <button data-delete-key class="key action">Delete</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

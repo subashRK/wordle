@@ -1,0 +1,329 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  color: var(--text-color);
+  user-select: none;
+}
+
+:root {
+  --primary-color: #303030;
+  --secondary-color: rgb(177, 177, 177);
+  --text-color: whitesmoke;
+  --transition-duration: 0.15s;
+  --success-color: #4bb543;
+  --almost-correct-color: orange;
+  --wrong-color: rgb(255, 75, 75);
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--primary-color);
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0px auto;
+  padding: 10px 10px;
+  gap: 10px;
+  align-items: center;
+}
+
+.words {
+  width: 75%;
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.words .word {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+  animation-duration: 0.5s;
+  --offset: 2%;
+}
+
+.words .word .letter {
+  --box-size: 10vmin;
+  --delay: 0.125s;
+  width: var(--box-size);
+  height: var(--box-size);
+  border: 2px solid var(--secondary-color);
+  font-size: 5vmin;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  cursor: default;
+  user-select: none;
+  transition: var(--transition-duration);
+  animation-duration: var(--delay);
+}
+
+.keyboard {
+  flex: 0.3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align: center;
+}
+
+.keyboard .row {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.keyboard .row .key {
+  font-size: 2.25vmin;
+  border: none;
+  background-color: var(--secondary-color);
+  text-transform: uppercase;
+  border-radius: 5px;
+  flex: 0.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-duration);
+}
+
+.keyboard .row .key.perfect {
+  background-color: var(--success-color);
+}
+
+.keyboard .row .key.correct {
+  background-color: var(--almost-correct-color);
+}
+
+.keyboard .row .key.wrong {
+  background-color: var(--wrong-color);
+}
+
+.keyboard .row .key.action {
+  flex: 0.15;
+}
+
+.keyboard .row .key:not(:disabled):hover {
+  opacity: 0.85;
+}
+
+.letter-perfect-animation {
+  background-color: var(--success-color);
+  border-color: var(--success-color) !important;
+}
+
+.letter-correct-animation {
+  background-color: var(--almost-correct-color);
+  border-color: var(--almost-correct-color) !important;
+}
+
+.letter-wrong-animation {
+  background-color: var(--wrong-color);
+  border-color: var(--wrong-color) !important;
+}
+
+.key:disabled {
+  opacity: 0.7;
+  cursor: default !important;
+}
+
+.tip {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--text-color);
+  color: var(--primary-color);
+  padding: 10px;
+  border-radius: 3px;
+  transition: var(--transition-duration);
+  opacity: 0;
+  z-index: 999999999999999999;
+}
+
+.tip.show {
+  opacity: 1;
+}
+
+.profile-icon {
+  position: absolute;
+  right: 2%;
+  top: 2%;
+  cursor: pointer;
+  transition: var(--transition-duration);
+}
+
+.profile-icon > svg {
+  width: 5vmin;
+  height: 5vmin;
+}
+
+.profile-icon:hover {
+  opacity: 0.8;
+}
+
+.profile-modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999999999999999999999999999999999;
+  padding: 0px 15px;
+}
+
+.profile-modal > .profile-modal-content {
+  padding: 0 20px;
+  width: 80%;
+  max-width: 600px;
+  height: 50vh;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  align-items: center;
+  text-transform: uppercase;
+  transform: translateY(150%);
+  transition: 0.3s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.profile-modal > .profile-modal-content .close-btn {
+  border: 1px solid var(--almost-correct-color);
+  border-radius: 3px;
+  color: var(--almost-correct-color);
+  transition: var(--transition-duration);
+  background-color: var(--primary-color);
+  padding: 7.5px 15px;
+  font-size: 2.9vmin;
+  cursor: pointer;
+}
+
+.profile-modal > .profile-modal-content .close-btn:hover {
+  background-color: var(--almost-correct-color);
+  color: var(--primary-color);
+}
+
+.profile-modal > .profile-modal-content {
+  letter-spacing: 2px;
+  font-size: 3vmin;
+}
+
+.profile-modal > .profile-modal-content .stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.profile-modal > .profile-modal-content .stats .stat .title {
+  font-size: 2vmin;
+  color: var(--secondary-color);
+}
+
+.profile-modal > .profile-modal-content .stats .stat .text {
+  font-size: 6vmin;
+}
+
+.profile-modal.show {
+  visibility: visible;
+}
+
+.profile-modal.show > .profile-modal-content {
+  transform: translateY(0%);
+}
+
+@keyframes letter-animation {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wrong-word-animation {
+  0% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translateX(var(--offset));
+  }
+  20% {
+    transform: translateX(calc(var(--offset) * -1));
+  }
+  30% {
+    transform: translateX(var(--offset));
+  }
+  40% {
+    transform: translateX(calc(var(--offset) * -1));
+  }
+  50% {
+    transform: translateX(var(--offset));
+  }
+  60% {
+    transform: translateX(calc(var(--offset) * -1));
+  }
+
+  70% {
+    transform: translateX(var(--offset));
+  }
+
+  80% {
+    transform: translateX(calc(var(--offset) * -1));
+  }
+
+  90% {
+    transform: translateX(var(--offset));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .words {
+    gap: 10px;
+  }
+
+  .words .word .letter {
+    --box-size: 15vmin;
+    font-size: 7vmin;
+  }
+
+  .keyboard .row .key {
+    font-size: 3.5vmin;
+  }
+}
+
+@media only screen and (max-width: 500px) and (min-width: 450px) {
+  .words .word .letter {
+    --box-size: 12.5vmin;
+  }
+}
