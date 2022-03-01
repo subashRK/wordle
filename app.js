@@ -209,7 +209,6 @@ const validateWord = () => {
   })
 
   if (isCorrectWord(board[currentWord - 1])) {
-    gamesPlayed++
     gamesWon++
     win = true
     saveGame()
