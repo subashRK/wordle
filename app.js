@@ -182,6 +182,32 @@ const looseGame = () => {
   showTip(word)
 }
 
+const validateLetterPositions = wordToCheck => {
+  wordToCheck.forEach((letter, i) => {
+    const totalCurrentLetter = word
+      .split("")
+      .filter(l => l === letter.letter).length
+    const totalCorrectCurrentLetter = board[currentWord - 1].filter(
+      (l, li) =>
+        l.letter === letter.letter && (word[li] === letter.letter || l.exists)
+    ).length
+
+    if (letter.letter === word[i]) {
+      letter.inCorrectPosition = true
+      letter.exists = true
+    } else if (
+      word.includes(letter.letter) &&
+      totalCorrectCurrentLetter < totalCurrentLetter
+    ) {
+      letter.exists = true
+      letter.inCorrectPosition = false
+    } else {
+      letter.inCorrectPosition = false
+      letter.exists = false
+    }
+  })
+}
+
 const validateWord = () => {
   if (!words.includes(board[currentWord - 1].map(l => l.letter).join(""))) {
     showTip("Word is not in dictionary!")
@@ -193,22 +219,10 @@ const validateWord = () => {
     return
   }
 
-  board[currentWord - 1].forEach((letter, i) => {
-    let currentLetterCount = 0
-    let currentLetterInAnswerCount = 0
-
-    word.split("").forEach(l => l === letter.letter && currentLetterCount++)
-    board[currentWord - 1].forEach((l, il) => {
-      l.letter === letter.letter && il <= i && currentLetterInAnswerCount++
-    })
-
-    letter.exists =
-      word.includes(letter.letter) &&
-      currentLetterInAnswerCount <= currentLetterCount
-    letter.inCorrectPosition = letter.exists && word[i] === letter.letter
-  })
+  validateLetterPositions(board[currentWord - 1])
 
   if (isCorrectWord(board[currentWord - 1])) {
+    gamesPlayed++
     gamesWon++
     win = true
     saveGame()
