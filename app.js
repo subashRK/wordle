@@ -291,7 +291,7 @@ const toggleModal = () => {
       winPercent
     )
       ? "0%"
-      : winPercent + "%"
+      : Math.floor(winPercent) + "%"
   }
 }
 
