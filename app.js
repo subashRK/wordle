@@ -11,11 +11,14 @@ const profileModalCloseEl = document.querySelector(
 const TOTAL_WORDS = 6
 const TOTAL_LETTERS = 5
 const ALPHABETS = "abcdefghijklmnopqrstuvwxyz"
+const LOCAL_STORAGE_PREFIX = "wordle-"
 const INIT_BOARD = [[], [], [], [], [], []]
 const START_DATE_VALUE = 693501 // Got this by new Date("1900").getDate() + new Date("1900").getMonth() * 12 + new Date("1900").getFullYear() * 365
 
-const game = JSON.parse(localStorage.getItem("game"))
-const profile = JSON.parse(localStorage.getItem("profile"))
+const game = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PREFIX + "game"))
+const profile = JSON.parse(
+  localStorage.getItem(LOCAL_STORAGE_PREFIX + "profile")
+)
 const date = new Date()
 const dateValue =
   date.getDate() + date.getMonth() * 12 + date.getFullYear() * 365
@@ -33,7 +36,7 @@ let gamesWon = profile?.gamesWon || 0
 
 const saveGame = () =>
   localStorage.setItem(
-    "game",
+    LOCAL_STORAGE_PREFIX + "game",
     JSON.stringify({
       board,
       currentWord,
@@ -41,6 +44,12 @@ const saveGame = () =>
       wordi,
       win,
     })
+  )
+
+const saveProfile = () =>
+  localStorage.setItem(
+    LOCAL_STORAGE_PREFIX + "profile",
+    JSON.stringify({ gamesPlayed, gamesWon })
   )
 
 const stopGame = () => {
@@ -63,7 +72,13 @@ const startGame = () => {
     saveGame()
   }
 
-  if (win || currentWord > TOTAL_WORDS) {
+  if (win) {
+    stopGame()
+    saveProfile()
+    return
+  }
+
+  if (currentWord > TOTAL_WORDS) {
     stopGame()
     looseGame()
     setTimeout(toggleModal, 750)
@@ -113,17 +128,12 @@ const updateContents = () => {
         return
       }
 
-      const delay = parseFloat(
-        getComputedStyle(letterEl).getPropertyValue("--delay")
-      )
-
       const addAnimation = () => {
         letterEl.style.animationName = null
         setTimeout(() => (letterEl.style.animationName = "letter-animation"), 1)
       }
 
       if (letterEl.textContent.trim() === "") addAnimation()
-
       letterEl.textContent = letter?.letter || ""
 
       if (letter.exists != null) {
@@ -137,6 +147,11 @@ const updateContents = () => {
           letterEl.classList.contains("letter-wrong-animation")
         )
           return
+
+        const delay = parseFloat(
+          getComputedStyle(letterEl).getPropertyValue("--delay")
+        )
+
         letterEl.style.animationDelay = i * delay + "s"
         letterEl.style.transitionDelay = i * delay + "s"
 
@@ -178,7 +193,7 @@ const updateContents = () => {
 }
 
 const looseGame = () => {
-  localStorage.setItem("profile", JSON.stringify({ gamesPlayed, gamesWon }))
+  saveProfile()
   showTip(word)
 }
 
@@ -226,7 +241,7 @@ const validateWord = () => {
     gamesWon++
     win = true
     saveGame()
-    localStorage.setItem("profile", JSON.stringify({ gamesPlayed, gamesWon }))
+    saveProfile()
     stopGame()
     setTimeout(toggleModal, 750)
   }
