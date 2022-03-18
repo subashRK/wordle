@@ -351,11 +351,12 @@ body {
 @media only screen and (max-height: 630px) {
   .words .word .letter {
     --box-size: 8vmin;
+    font-size: 4.5vmin;
   }
 }
 
 @media only screen and (max-height: 450px) {
   .words .word .letter {
-    --box-size: 6vmin;
+    --box-size: 6.5vmin;
   }
 }
