@@ -153,6 +153,10 @@ body {
   flex: 0.15;
 }
 
+.keyboard .row .key.action svg {
+  pointer-events: none;
+}
+
 .keyboard .row .key:not(:disabled):hover {
   opacity: 0.85;
 }
