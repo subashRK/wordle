@@ -73,10 +73,13 @@ body {
 }
 
 .words .word .letter {
-  --box-size: 55px;
+  --max-box-size: 55px;
+  --box-size: 15vmin;
   --delay: 0.125s;
   width: var(--box-size);
   height: var(--box-size);
+  max-width: var(--max-box-size);
+  max-height: var(--max-box-size);
   border: 2px solid var(--secondary-color);
   font-size: 2rem;
   font-weight: bold;
@@ -345,8 +348,14 @@ body {
   }
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-height: 630px) {
   .words .word .letter {
-    --box-size: 15vmin;
+    --box-size: 8vmin;
+  }
+}
+
+@media only screen and (max-height: 450px) {
+  .words .word .letter {
+    --box-size: 6vmin;
   }
 }
